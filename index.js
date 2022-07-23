@@ -19,7 +19,9 @@ import {
 import { handleErrors, checkAuth } from "./utils/index.js";
 
 mongoose
-  .connect(process.env.MONGODB_URL)
+  .connect(
+    "mongodb+srv://admin:admin@cluster0.zwcrnmx.mongodb.net/blog?retryWrites=true&w=majority"
+  )
   .then(() => console.log("DB ok"))
   .catch((error) => console.log(error));
 
@@ -95,7 +97,7 @@ app.get(
 app.get("/comments", checkAuth, handleErrors, CommentController.getAllComments);
 app.use("/uploads", express.static("uploads"));
 
-server.listen(process.env.PORT || 4444, (error) => {
+server.listen(4444, (error) => {
   if (error) {
     return console.log(error);
   }
